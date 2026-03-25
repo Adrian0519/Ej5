@@ -1,11 +1,12 @@
 package com.example.Ej505.Entidades;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
-
+@Data
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor

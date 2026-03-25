@@ -2,12 +2,13 @@ package com.example.Ej505.Entidades;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
@@ -24,4 +25,6 @@ public class Libros {
     public void agregarPrestamo(Prestamos prestamos){
         this.agregarPrestamo(prestamos);
     }
+
+
 }
