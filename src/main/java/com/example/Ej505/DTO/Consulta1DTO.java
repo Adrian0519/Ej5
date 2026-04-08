@@ -1,7 +1,9 @@
 package com.example.Ej505.DTO;
 
 import com.example.Ej505.Entidades.Libros;
+import lombok.Data;
 
+@Data
 public class Consulta1DTO {
     private int id_libro;
     private String titulo;

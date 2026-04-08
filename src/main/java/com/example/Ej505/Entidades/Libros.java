@@ -2,9 +2,7 @@ package com.example.Ej505.Entidades;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,18 +11,22 @@ import java.util.List;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Table(name = "libros")
+@EqualsAndHashCode(exclude = {"listaPrestamo"})
 public class Libros {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_libro;
+    @NonNull
     private String titulo;
+    @NonNull
     private String autor;
+    @NonNull
     private int ano_publicacion;
-    @OneToMany(mappedBy = "libros")
+    @OneToMany(mappedBy = "libro")
     private List<Prestamos> list=new ArrayList<>();
 
     public void agregarPrestamo(Prestamos prestamos){
-        this.agregarPrestamo(prestamos);
+        this.list.add(prestamos);
     }
-
 
 }

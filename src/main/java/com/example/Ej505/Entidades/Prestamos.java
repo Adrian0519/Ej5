@@ -1,9 +1,7 @@
 package com.example.Ej505.Entidades;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 @Data
@@ -11,13 +9,14 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Table(name = "prestamos")
-
+@EqualsAndHashCode(exclude = {"socio","libro"})
 public class Prestamos {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_prestamo;
-    private int id_libro;
-    private int id_socio;
+    @NonNull
     private LocalDate fecha_prestamo;
+    @NonNull
     private LocalDate fecha_devolucion;
     @ManyToOne
     @JoinColumn(name = "id_socio")
@@ -27,6 +26,9 @@ public class Prestamos {
     @JoinColumn(name = "id_libro")
     private Libros libro;
 
+    public Prestamos(LocalDate fecha_prestamo) {
+        this.fecha_prestamo = fecha_prestamo;
+    }
     public void agregarSocio(Socios socio){
         this.socio=socio;
         socio.agregarPrestamo(this);
