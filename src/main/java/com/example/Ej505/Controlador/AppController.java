@@ -53,7 +53,7 @@ public class AppController {
     }
     @GetMapping("/consulta8/{fecha1}:{fecha2}")
     public ResponseEntity<List<Consulta8DTO>> consulta8(@PathVariable String fecha1, @PathVariable String fecha2){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate f1 = LocalDate.parse(fecha1, formatter);
         LocalDate f2 = LocalDate.parse(fecha2, formatter);
         return ResponseEntity.ok(librosService.consulta8(f1, f2));

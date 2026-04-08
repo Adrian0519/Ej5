@@ -8,20 +8,20 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface SociosRepository extends JpaRepository<Socios, Integer> {
-    @Query("SELECT s.nombre, COUNT(p.id_libro)\n" +
-            "FROM Socios s " +
-            "LEFT JOIN Prestamos ON s.id_socio = p.id_socio\n" +
+
+    @Query("select s.nombre, COUNT(p.libro.id_libro) " +
+            "from Socios s left JOIN Prestamos p ON s.id_socio = p.socio.id_socio " +
             "GROUP BY s.id_socio, s.nombre")
     public List<Object[]> consulta3();
-    @Query("SELECT s.nombre, p.fecha_devolucion\n" +
-            "FROM Socios s " +
-            "JOIN Prestamos ON s.id_socio = p.id_socio\n" +
-            "WHERE p.fecha_devolucion > p.fecha_prestamo")
+
+    @Query("select s.nombre, p.fecha_devolucion " +
+            "from Socios s JOIN Prestamos p ON s.id_socio = p.socio.id_socio " +
+            "where p.fecha_devolucion > p.fecha_prestamo")
     public List<Object[]> consulta4();
-    @Query("SELECT s.id_socio, s.nombre, COUNT(p.id_libro) \n" +
-            "FROM Socios s " +
-            "JOIN Prestamos ON s.id_socio = p.id_socio\n" +
-            "GROUP BY s.id_socio, s.nombre\n" +
-            "HAVING COUNT(p.id_libro) > 1")
+
+    @Query("select s.id_socio, s.nombre, COUNT(p.libro.id_libro) " +
+            "from Socios s JOIN Prestamos p ON s.id_socio = p.socio.id_socio " +
+            "group by s.id_socio, s.nombre " +
+            "having count(p.libro.id_libro) > 1")
     public List<Object[]> consulta6();
 }
